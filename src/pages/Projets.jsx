@@ -1,5 +1,5 @@
 import Title from "../components/Title";
-import { projectlist } from "../components/projectlist";
+import { projectlist } from "../components/Projectlist";
 import { Link } from "react-router-dom";
 import { flyers } from "../components/SocialFlyersList";
 import { motion, AnimatePresence } from "motion/react";

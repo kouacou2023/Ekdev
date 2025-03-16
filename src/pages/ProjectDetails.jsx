@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { projectlist } from "../components/projectlist";
+import { projectlist } from "../components/Projectlist";
 import { ArrowLeft } from "@phosphor-icons/react";
 import { NavLink } from "react-router-dom";
 import Projectcart from "../components/Projectcart";

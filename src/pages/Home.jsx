@@ -1,7 +1,7 @@
 import Title from "../components/Title";
 import SouTitle from "../components/SouTitle";
 import Buttonprincipal from "../components/Buttonprincipal";
-import { projectlist } from "../components/projectlist";
+import { projectlist } from "../components/Projectlist";
 import { MapPinSimple } from "@phosphor-icons/react";
 import { useState } from "react";
 import SlideClient from "../components/SlideClient";
