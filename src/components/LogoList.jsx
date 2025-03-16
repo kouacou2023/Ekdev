@@ -1,0 +1,39 @@
+import logo1 from "./image/LOGO-PERFORMANCE-K.png";
+import logo2 from "./image/logo-douskab.png";
+import logo3 from "./image/Logo-Financial.png";
+import logo4 from "./image/Logo-fond-with.jpg";
+import logo5 from "./image/Logo-noir.jpg";
+import logo6 from "./image/Logo-Prof-du-memoire-red.jpg";
+import logo7 from "./image/Logo-tesse.png";
+import logo8 from "./image/Logo-Young-Event.jpg";
+import logo9 from "./image/Logo.jpg";
+import logo10 from "./image/LogoProRevolVert.jpg";
+import logo11 from "./image/LogoView.jpg";
+import logo12 from "./image/LogoView1.jpg";
+import logo13 from "./image/LogoView2.jpg";
+import logo14 from "./image/LogoView3.jpg";
+import logo15 from "./image/LogoView4.jpg";
+import logo16 from "./image/LogoView5.jpg";
+import logo17 from "./image/LogoView6.jpg";
+import logo18 from "./image/LogoView7.jpg";
+
+export const Logolist = [
+  { img: logo1 },
+  { img: logo2 },
+  { img: logo3 },
+  { img: logo4 },
+  { img: logo5 },
+  { img: logo6 },
+  { img: logo7 },
+  { img: logo8 },
+  { img: logo9 },
+  { img: logo10 },
+  { img: logo11 },
+  { img: logo12 },
+  { img: logo13 },
+  { img: logo14 },
+  { img: logo15 },
+  { img: logo16 },
+  { img: logo17 },
+  { img: logo18 },
+];
