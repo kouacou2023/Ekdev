@@ -10,10 +10,13 @@ import { NavLink, Link } from "react-router-dom";
 import Letconnect from "../components/Letconnect";
 import { flyers } from "../components/SocialFlyersList";
 import { Logolist } from "../components/LogoList";
+import { motion, AnimatePresence } from "motion/react";
+import TopScroll from "../components/TopScroll";
 
 export default function Home() {
   const [visibleProjects] = useState(2);
   const [visibleFlyers] = useState(6);
+  const [selectImage, setSelectedImage] = useState(null);
 
   return (
     <div className="space-y-6 font-Manrope m-5">
@@ -66,8 +69,31 @@ export default function Home() {
               key={index} // Clé unique pour optimiser le rendu React
               src={flyer.img} // Source de l'image
               alt="" // Texte alternatif pour l'accessibilité
+              onClick={() => setSelectedImage(flyer.img)}
             />
           ))}
+
+          <AnimatePresence>
+            {selectImage && ( // Affiche la modale seulement si une image est sélectionnée
+              <motion.div
+                className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
+                initial={{ opacity: 0 }} // L'opacité commence à 0 (invisible)
+                animate={{ opacity: 1 }} // Animation d'apparition en fondu (opacité 1)
+                exit={{ opacity: 0 }} // Animation de disparition en fondu (opacité 0)
+                // Lorsqu'on clique sur le fond sombre, on ferme la modale en remettant null
+                onClick={() => setSelectedImage(null)}
+              >
+                <motion.img
+                  src={selectImage} // Affiche l'image sélectionnée
+                  alt="Image en grand" // Texte alternatif pour l'accessibilité
+                  className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg"
+                  initial={{ scale: 0.8 }} // L'image commence plus petite
+                  animate={{ scale: 1 }} // Animation de zoom progressif
+                  exit={{ scale: 0.8 }} // Effet de rétrécissement lors de la fermeture
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         <SouTitle Stitle="Logos & Déclinaisons" />
@@ -79,8 +105,31 @@ export default function Home() {
               key={index} // Clé unique pour optimiser le rendu React
               src={Logolist.img} // Source de l'image
               alt="" // Texte alternatif pour l'accessibilité
+              onClick={() => setSelectedImage(Logolist.img)}
             />
           ))}
+
+          <AnimatePresence>
+            {selectImage && ( // Affiche la modale seulement si une image est sélectionnée
+              <motion.div
+                className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
+                initial={{ opacity: 0 }} // L'opacité commence à 0 (invisible)
+                animate={{ opacity: 1 }} // Animation d'apparition en fondu (opacité 1)
+                exit={{ opacity: 0 }} // Animation de disparition en fondu (opacité 0)
+                // Lorsqu'on clique sur le fond sombre, on ferme la modale en remettant null
+                onClick={() => setSelectedImage(null)}
+              >
+                <motion.img
+                  src={selectImage} // Affiche l'image sélectionnée
+                  alt="Image en grand" // Texte alternatif pour l'accessibilité
+                  className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg"
+                  initial={{ scale: 0.8 }} // L'image commence plus petite
+                  animate={{ scale: 1 }} // Animation de zoom progressif
+                  exit={{ scale: 0.8 }} // Effet de rétrécissement lors de la fermeture
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         <div className=" md:flex md:justify-between md:items-center ">
@@ -112,6 +161,10 @@ export default function Home() {
 
       <div>
         <Letconnect />
+      </div>
+
+      <div>
+        <TopScroll />
       </div>
     </div>
   );

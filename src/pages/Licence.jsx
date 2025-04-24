@@ -1,8 +1,8 @@
-import { PhosphorLogo,GoogleLogo,Image } from "@phosphor-icons/react";
+import { PhosphorLogo, GoogleLogo, Image } from "@phosphor-icons/react";
 import SouTitle from "../components/SouTitle";
 import Title from "../components/Title";
 import Letconnect from "../components/Letconnect";
-
+import TopScroll from "../components/TopScroll";
 
 export default function Licence() {
   return (
@@ -20,7 +20,9 @@ export default function Licence() {
         <SouTitle Stitle="Typographie" />
         <div className="flex gap-3">
           <GoogleLogo size={24} className="text-primary-500" weight="fill" />
-          <h1 className="text-primary-400  md:text-xl text-base">Google Font</h1>
+          <h1 className="text-primary-400  md:text-xl text-base">
+            Google Font
+          </h1>
         </div>
       </div>
 
@@ -32,8 +34,8 @@ export default function Licence() {
         </div>
       </div>
 
-      <Letconnect/>
-      
+      <Letconnect />
+      <TopScroll />
     </div>
   );
 }

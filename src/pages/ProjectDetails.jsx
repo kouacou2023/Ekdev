@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import Projectcart from "../components/Projectcart";
 import Buttonprincipal from "../components/Buttonprincipal";
 import { useState } from "react";
+import TopScroll from "../components/TopScroll";
 
 export default function ProjectDetails() {
   // État pour limiter le nombre de projets visibles
@@ -52,7 +53,7 @@ export default function ProjectDetails() {
           </p>
         </div>
       </div>
-      <img className="rounded-3xl " src={project.image} alt={project.title} />
+      <img className="rounded-3xl" src={project.image} alt={project.title} />
       <p className="text-primary-400 text-sm md:text-2xl pt-7">
         {project.details}
       </p>
@@ -66,25 +67,22 @@ export default function ProjectDetails() {
         </h1>
         <div className="grid pb-5 md:grid-cols-2 gap-10">
           {projectlist
-            .filter((p) => p.slug !== slug) // Exclut le projet actuel
-            .slice(0, visibleProjects) // Limite le nombre de projets affichés
-            .map((projectItem) => {
-              // projectItem est bien défini ici
-              console.log("Projet :", projectItem); // Vérifie les données du projet
-              return (
-                <NavLink
-                  to={`/projets/${projectItem.slug}`} // Utilise projectItem.slug
-                  key={projectItem.slug} // Clé unique pour React
-                >
-                  <Projectcart data={projectItem} />
-                </NavLink>
-              );
-            })}
+            .filter((p) => p.slug !== slug)
+            .slice(0, visibleProjects)
+            .map((projectItem) => (
+              <NavLink
+                to={`/projets/${projectItem.slug}`}
+                key={projectItem.slug}
+              >
+                <Projectcart data={projectItem} />
+              </NavLink>
+            ))}
         </div>
         <NavLink to="/projets">
           <Buttonprincipal title="VOIR PLUSIEURS PROJECTS" />
         </NavLink>
       </div>
+      <TopScroll />
     </div>
   );
 }

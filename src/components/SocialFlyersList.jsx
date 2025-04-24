@@ -51,6 +51,17 @@ import flyers50 from "./image/flyers50.jpg";
 import flyers51 from "./image/flyers51.jpg";
 import flyers52 from "./image/flyers52.jpg";
 import flyers53 from "./image/flyers53.jpg";
+import flyers54 from "./image/flyers54.jpg";
+import flyers55 from "./image/flyers55.jpg";
+import flyers56 from "./image/flyers56.jpg";
+import flyers57 from "./image/flyers57.jpg";
+import flyers58 from "./image/flyers58.jpg";
+import flyers59 from "./image/flyers59.jpg";
+import flyers60 from "./image/flyers60.jpg";
+import flyers61 from "./image/flyers61.jpg";
+import flyers62 from "./image/flyers62.jpg";
+import flyers63 from "./image/flyers63.jpg";
+import flyers64 from "./image/flyers64.jpg";
 
 export const flyers = [
   {
@@ -211,5 +222,38 @@ export const flyers = [
   },
   {
     img: flyers53,
+  },
+  {
+    img: flyers54,
+  },
+  {
+    img: flyers55,
+  },
+  {
+    img: flyers56,
+  },
+  {
+    img: flyers57,
+  },
+  {
+    img: flyers58,
+  },
+  {
+    img: flyers59,
+  },
+  {
+    img: flyers60,
+  },
+  {
+    img: flyers61,
+  },
+  {
+    img: flyers62,
+  },
+  {
+    img: flyers63,
+  },
+  {
+    img: flyers64,
   },
 ];

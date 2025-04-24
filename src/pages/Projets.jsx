@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import Letconnect from "../components/Letconnect";
 import { Logolist } from "../components/LogoList";
-
+import TopScroll from "../components/TopScroll";
 export default function Projets() {
   const [selectImage, setSelectedImage] = useState(null);
 
@@ -110,6 +110,7 @@ export default function Projets() {
 
         <div />
         <Letconnect />
+        <TopScroll />
       </div>
     </div>
   );

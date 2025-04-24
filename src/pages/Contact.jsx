@@ -1,5 +1,3 @@
-import { useForm } from "react-hook-form";
-import emailjs from "@emailjs/browser";
 import Title from "../components/Title";
 import SouTitle from "../components/SouTitle";
 import {
@@ -10,54 +8,93 @@ import {
   TiktokLogo,
   LinkedinLogo,
 } from "@phosphor-icons/react";
+import TopScroll from "../components/TopScroll";
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 // Définition du composant Contact
 export default function Contact() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const [formData, setFormData] = useState({
+    nom: "",
+    email: "",
+    message: "",
+  });
 
-  const onSubmit = (data) => {
-    // Paramètres pour EmailJS
-    const templateParams = {
-      from_name: data.nom,
-      from_email: data.email,
-      message: data.message,
-      to_email: "kouacouemmanuel1234@gmail.com",
-    };
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-    // Envoi de l'email
-    emailjs
-      .send(
-        "YOUR_SERVICE_ID", // Remplacez par votre Service ID
-        "YOUR_TEMPLATE_ID", // Remplacez par votre Template ID
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.nom.trim()) {
+      newErrors.nom = "Le nom est requis";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "L'email est requis";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Veuillez entrer un email valide";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Le message est requis";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      // Configuration d'EmailJS
+      const templateParams = {
+        from_name: formData.nom,
+        from_email: formData.email,
+        message: formData.message,
+      };
+
+      // Remplacez ces valeurs par vos propres identifiants EmailJS
+      const response = await emailjs.send(
+        "service_0apj81a", // Service ID
+        "template_b1xhtcr", // Template ID
         templateParams,
-        "YOUR_PUBLIC_KEY" // Remplacez par votre Public Key
-      )
-      .then((response) => {
-        console.log(
-          "Email envoyé avec succès!",
-          response.status,
-          response.text
-        );
-        alert("Votre message a été envoyé avec succès!");
-        reset(); // Réinitialise le formulaire après l'envoi
-      })
-      .catch((err) => {
-        console.error("Erreur lors de lenvoi de lemail:", err);
-        alert(
-          "Une erreur est survenue lors de lenvoi du message. Veuillez réessayer."
-        );
-      });
+        "O007RFAZKP9Ahs0lW" // Public Key
+      );
+
+      if (response.status === 200) {
+        setSubmitStatus("success");
+        setFormData({ nom: "", email: "", message: "" });
+      } else {
+        throw new Error("Erreur lors de l'envoi de l'email");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+      console.error("Erreur lors de l'envoi:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="m-5 font-Manrope">
       <Title title="Apprenez à me connaitre" />
-      <div className="md:flex md:gap-20">
+      <div className="md:flex md:justify-between md:space-x-60">
         <div>
           {/* Section des contacts */}
           <div className="mt-10 space-y-5">
@@ -118,7 +155,7 @@ export default function Contact() {
               />
               <a
                 className="text-primary-400 group-hover:duration-500 group-hover:text-primary-100"
-                href="https://wa.me/0788953014"
+                href="https://wa.me/2250788953014"
               >
                 Whatsapp
               </a>
@@ -156,61 +193,75 @@ export default function Contact() {
 
         <div className="pt-10">
           <SouTitle Stitle="Me laisser un message" />
-          <form className="space-y-4 pt-8" onSubmit={handleSubmit(onSubmit)}>
-            <div className="md:grid-cols-2 md:grid md:gap-5 space-y-4">
+          <form className="space-y-4 pt-8" onSubmit={handleSubmit}>
+            <div className="md:grid-cols-2 md:space-y-0 space-y-5 md:grid md:gap-5">
               <div>
                 <input
-                  className="bg-primary-600 placeholder:text-primary-400 py-4 px-5 md:w-auto w-full rounded-2xl"
+                  name="nom"
+                  value={formData.nom}
+                  onChange={handleChange}
+                  className={`bg-primary-600 text-primary-500 placeholder:text-primary-400 py-4 px-5 md:w-full w-full rounded-2xl ${
+                    errors.nom ? "border-2 border-red-500" : ""
+                  }`}
                   type="text"
                   placeholder="Nom"
-                  {...register("nom", { required: "Le nom est requis" })}
                 />
                 {errors.nom && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.nom.message}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{errors.nom}</p>
                 )}
               </div>
               <div>
                 <input
-                  className="bg-primary-600 md:w-auto placeholder:text-primary-400 py-4 px-5 w-full rounded-2xl"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`bg-primary-600 text-primary-500 md:w-full placeholder:text-primary-400 py-4 px-5 w-full rounded-2xl ${
+                    errors.email ? "border-2 border-red-500" : ""
+                  }`}
                   type="email"
                   placeholder="Email"
-                  {...register("email", {
-                    required: "L'email est requis",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Adresse email invalide",
-                    },
-                  })}
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.email.message}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                 )}
               </div>
             </div>
             <div>
               <textarea
-                className="bg-primary-600 placeholder:text-primary-400 py-4 px-5 h-64 w-full rounded-2xl"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className={`bg-primary-600 text-primary-500 placeholder:text-primary-400 py-4 px-5 h-64 w-full rounded-2xl ${
+                  errors.message ? "border-2 border-red-500" : ""
+                }`}
                 placeholder="Message"
-                {...register("message", { required: "Le message est requis" })}
               />
               {errors.message && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.message.message}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
               )}
             </div>
+            {submitStatus === "success" && (
+              <p className="text-green-500 text-center">
+                Message envoyé avec succès !
+              </p>
+            )}
+            {submitStatus === "error" && (
+              <p className="text-red-500 text-center">
+                Une erreur est survenue. Veuillez réessayer.
+              </p>
+            )}
             <button
               type="submit"
-              className="bg-primary-100 text-primary-200 w-full py-4 px-14 rounded-2xl hover:bg-primary-200 hover:text-primary-100 transition duration-300"
+              disabled={isSubmitting}
+              className="bg-primary-100 text-primary-200 w-full py-4 px-14 rounded-2xl hover:bg-primary-200 hover:text-primary-100 transition duration-300 disabled:opacity-50"
             >
-              Envoyer Mon Message
+              {isSubmitting ? "Envoi en cours..." : "Envoyer Mon Message"}
             </button>
           </form>
         </div>
+      </div>
+      <div>
+        <TopScroll />
       </div>
     </div>
   );

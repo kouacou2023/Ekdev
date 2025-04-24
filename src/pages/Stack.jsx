@@ -8,6 +8,7 @@ import img6 from "./img/adobe-premiere-pro.png";
 import img7 from "./img/metaLogo.png";
 import img8 from "./img/Adobe_After_Effects.png";
 import developerbg from "./img/develope.png";
+import TopScroll from "../components/TopScroll";
 
 import { NavLink } from "react-router-dom";
 import { DotsThreeOutlineVertical } from "@phosphor-icons/react";
@@ -127,6 +128,7 @@ export default function Stack() {
         </div>
       </NavLink>
       <Letconnect />
+      <TopScroll />
     </div>
   );
 }

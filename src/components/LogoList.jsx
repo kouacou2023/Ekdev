@@ -16,6 +16,8 @@ import logo15 from "./image/LogoView4.jpg";
 import logo16 from "./image/LogoView5.jpg";
 import logo17 from "./image/LogoView6.jpg";
 import logo18 from "./image/LogoView7.jpg";
+import logo19 from "./image/LogoFaimdeloup.jpg";
+import logo20 from "./image/LogoFaimdeloupview.jpg";
 
 export const Logolist = [
   { img: logo1 },
@@ -36,4 +38,6 @@ export const Logolist = [
   { img: logo16 },
   { img: logo17 },
   { img: logo18 },
+  { img: logo19 },
+  { img: logo20 },
 ];

@@ -3,6 +3,7 @@ import Buttonprincipal from "../components/Buttonprincipal";
 import Letconnect from "../components/Letconnect";
 import SouTitle from "../components/SouTitle";
 import Title from "../components/Title";
+import TopScroll from "../components/TopScroll";
 
 import {
   GraduationCap,
@@ -190,6 +191,10 @@ export default function About() {
 
       <div>
         <Letconnect />
+      </div>
+
+      <div>
+        <TopScroll />
       </div>
     </div>
   );
